@@ -9,13 +9,12 @@ hashHistory
 } from 'react-router';
 
 // Import components
-
-
+import Container from './components/container.jsx';
 
 class App extends Component {
 
     render() {
-        return <div  />
+        return <Container/>
     }
 
 }
