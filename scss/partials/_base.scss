@@ -1,0 +1,11 @@
+.base {
+    width: 80vw;
+    height: 80vh;
+    background-color: $inner-bg;
+    align-self: center;
+    border-radius: 5px;
+    box-shadow: 0 0 50px #192041;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between
+}

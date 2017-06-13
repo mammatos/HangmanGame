@@ -7,7 +7,7 @@ export default class WordContainer extends Component {
 
     render() {
         return (
-            <div>
+            <div className="wordContainer">
                 <Letter/>
                 <Letter/>
                 <Letter/>

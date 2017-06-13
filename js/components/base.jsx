@@ -6,11 +6,11 @@ import MissedContainer from './missedContainer.jsx';
 import WordContainer from './wordContainer.jsx';
 import Figure from './figure.jsx';
 
-export default class Main extends Component {
+export default class Base extends Component {
 
     render() {
         return (
-            <div>
+            <div className="base">
                 <CharacterContainer/>
                 <MissedContainer/>
                 <WordContainer/>

@@ -11,7 +11,7 @@ export default class CharacterContainer extends Component {
 
     render() {
         return (
-            <div>
+            <div className="characterContainer">
                 <img src="assets/img/bar.png"/>
                 <img src="assets/img/head.png"/>
                 <Neck/>

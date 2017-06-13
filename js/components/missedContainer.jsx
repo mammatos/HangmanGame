@@ -7,7 +7,7 @@ export default class MissedContainer extends Component {
 
     render() {
         return (
-            <div>
+            <div className="missedContainer">
                 <h1>You missed:</h1>
                 <MissedLettersContainer/>
             </div>

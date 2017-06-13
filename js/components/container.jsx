@@ -1,16 +1,15 @@
 import React, { Component } from 'react';
 
 // Import components
-import Main from './main.jsx';
+import Base from './base.jsx';
 
 export default class Container extends Component {
 
     render() {
         return (
-            <div>
-                <Main/>
+            <div className="container">
+                <Base/>
             </div>
         );
     }
-
 }

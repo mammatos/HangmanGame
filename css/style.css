@@ -40,3 +40,32 @@ q:before, q:after {
 table {
   border-collapse: collapse;
   border-spacing: 0; }
+
+.container {
+  background-color: #3b4163;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  justify-content: center; }
+
+.base {
+  width: 80vw;
+  height: 80vh;
+  background-color: #f5f5f5;
+  align-self: center;
+  border-radius: 5px;
+  box-shadow: 0 0 50px #192041;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between; }
+
+.characterContainer {
+  border: 2px solid red;
+  width: 30rem; }
+
+.missedContainer {
+  border: 2px solid green; }
+
+.wordContainer {
+  border: 2px solid orange;
+  width: 100%; }
