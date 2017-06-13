@@ -1,4 +1,23 @@
 .wordContainer {
     border: 2px solid orange;
     width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem 3rem;
+
+    .box-letterCorrect {
+        background-color: $boxBg-correct;
+        width: 4.2rem;
+        height: 4.5rem;
+        border-radius: 5px;
+        opacity: 0.9;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .letterCorrect {
+            color: $letterCorrect;
+            font-size: 2rem;
+        }
+    }
 }

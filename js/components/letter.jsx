@@ -4,8 +4,8 @@ export default class Letter extends Component {
 
     render() {
         return (
-            <div>
-                <p>T</p>
+            <div className="box-letterCorrect">
+                <p className="letterCorrect">T</p>
             </div>
         );
     }

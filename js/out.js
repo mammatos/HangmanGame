@@ -13118,15 +13118,15 @@ var Letter = function (_Component) {
     }
 
     _createClass(Letter, [{
-        key: 'render',
+        key: "render",
         value: function render() {
             return _react2.default.createElement(
-                'div',
-                null,
+                "div",
+                { className: "box-letterCorrect" },
                 _react2.default.createElement(
-                    'p',
-                    null,
-                    'T'
+                    "p",
+                    { className: "letterCorrect" },
+                    "T"
                 )
             );
         }
