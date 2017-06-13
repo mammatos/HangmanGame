@@ -5,7 +5,7 @@ export default class MissedLetter extends Component {
     render() {
         return (
             <div>
-                <p>B</p>
+                <p className="missedLetter">B</p>
             </div>
         );
     }

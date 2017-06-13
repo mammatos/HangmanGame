@@ -12934,9 +12934,9 @@ var Figure = function (_Component) {
     }
 
     _createClass(Figure, [{
-        key: 'render',
+        key: "render",
         value: function render() {
-            return _react2.default.createElement('div', null);
+            return _react2.default.createElement("div", { className: "figure" });
         }
     }]);
 
@@ -13186,7 +13186,7 @@ var MissedContainer = function (_Component) {
                 { className: 'missedContainer' },
                 _react2.default.createElement(
                     'h1',
-                    null,
+                    { className: 'missedHeader' },
                     'You missed:'
                 ),
                 _react2.default.createElement(_missedLettersContainer2.default, null)
@@ -13234,15 +13234,15 @@ var MissedLetter = function (_Component) {
     }
 
     _createClass(MissedLetter, [{
-        key: 'render',
+        key: "render",
         value: function render() {
             return _react2.default.createElement(
-                'div',
+                "div",
                 null,
                 _react2.default.createElement(
-                    'p',
-                    null,
-                    'B'
+                    "p",
+                    { className: "missedLetter" },
+                    "B"
                 )
             );
         }
@@ -13299,7 +13299,7 @@ var MissedLettersContainer = function (_Component) {
         value: function render() {
             return _react2.default.createElement(
                 'div',
-                null,
+                { className: 'missedLettersContainer' },
                 _react2.default.createElement(_missedLetter2.default, null),
                 _react2.default.createElement(_missedLetter2.default, null),
                 _react2.default.createElement(_missedLetter2.default, null),

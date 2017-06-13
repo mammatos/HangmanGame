@@ -8,7 +8,7 @@ export default class MissedLettersContainer extends Component {
 
     render() {
         return (
-            <div>
+            <div className="missedLettersContainer">
                 <MissedLetter/>
                 <MissedLetter/>
                 <MissedLetter/>

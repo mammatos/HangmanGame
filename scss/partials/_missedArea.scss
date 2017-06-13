@@ -1,3 +1,21 @@
 .missedContainer {
     border: 2px solid green;
+    width: 30rem;
+    margin-top: 2rem;
+
+    .missedHeader {
+        text-transform: uppercase;
+        color: $missedHeader;
+    }
+
+    .missedLettersContainer {
+        display: flex;
+        margin-top: 0.5rem;
+
+        .missedLetter {
+            color: $accent;
+            font-size: 3rem;
+            margin-right: 1rem;
+        }
+    }
 }

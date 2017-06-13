@@ -1,13 +1,13 @@
 .characterContainer {
     border: 2px solid red;
-    width: 30rem;
+    width: 20rem;
     overflow: hidden;
     height: 60vh;
 
     .bar {
-        width: 55%;
+        width: 13rem;
         position: relative;
-        right: 23%;
+        right: 4rem;
         top: -2rem;
     }
 
@@ -15,7 +15,7 @@
         width: 6.5rem;
         position: relative;
         top: 4.5rem;
-        right: 12rem;
+        right: 8.5rem;
         z-index: 1;
     }
 
