@@ -12749,10 +12749,10 @@ var CharacterContainer = function (_Component) {
             return _react2.default.createElement(
                 'div',
                 { className: 'characterContainer' },
-                _react2.default.createElement('img', { src: 'assets/img/bar.png' }),
-                _react2.default.createElement('img', { src: 'assets/img/head.png' }),
+                _react2.default.createElement('img', { src: 'assets/img/bar.png', className: 'bar' }),
+                _react2.default.createElement('img', { src: 'assets/img/head.png', className: 'head' }),
                 _react2.default.createElement(_neck2.default, null),
-                _react2.default.createElement('img', { src: 'assets/img/corpus.png' }),
+                _react2.default.createElement('img', { src: 'assets/img/corpus.png', className: 'corpus' }),
                 _react2.default.createElement(_arm2.default, null),
                 _react2.default.createElement(_arm2.default, null),
                 _react2.default.createElement(_hand2.default, null),
@@ -13283,9 +13283,9 @@ var Neck = function (_Component) {
     }
 
     _createClass(Neck, [{
-        key: 'render',
+        key: "render",
         value: function render() {
-            return _react2.default.createElement('div', null);
+            return _react2.default.createElement("div", { className: "neck" });
         }
     }]);
 

@@ -12,10 +12,10 @@ export default class CharacterContainer extends Component {
     render() {
         return (
             <div className="characterContainer">
-                <img src="assets/img/bar.png"/>
-                <img src="assets/img/head.png"/>
+                <img src="assets/img/bar.png" className="bar"/>
+                <img src="assets/img/head.png" className="head"/>
                 <Neck/>
-                <img src="assets/img/corpus.png"/>
+                <img src="assets/img/corpus.png" className="corpus"/>
                 <Arm/>
                 <Arm/>
                 <Hand/>

@@ -1,4 +1,36 @@
 .characterContainer {
     border: 2px solid red;
     width: 30rem;
+    overflow: hidden;
+
+    .bar {
+        width: 60%;
+        position: relative;
+        right: 23%;
+        top: -3rem;
+    }
+
+    .head {
+        width: 8rem;
+        position: relative;
+        top: 5.4rem;
+        right: 12.7rem;
+        z-index: 1;
+    }
+
+    .neck {
+        height: 2rem;
+        width: 2rem;
+        position: relative;
+        left: 8.35em;
+        top: 4.5rem;
+        background-color: $skin;
+    }
+
+    .corpus {
+        width: 5rem;
+        position: relative;
+        left: 6.9rem;
+        top: 4rem;
+    }
 }
