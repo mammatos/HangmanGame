@@ -16,14 +16,14 @@ export default class CharacterContainer extends Component {
                 <img src="assets/img/head.png" className="head"/>
                 <Neck/>
                 <img src="assets/img/corpus.png" className="corpus"/>
-                <Arm/>
-                <Arm/>
-                <Hand/>
-                <Hand/>
-                <Leg/>
-                <Leg/>
-                <Foot/>
-                <Foot/>
+                <Arm className="arm-right"/>
+                <Arm className="arm-left"/>
+                <Hand className="hand-right"/>
+                <Hand className="hand-left"/>
+                <Leg className="leg-right"/>
+                <Leg className="leg-left"/>
+                <Foot className="foot-right"/>
+                <Foot className="foot-left"/>
             </div>
         );
     }

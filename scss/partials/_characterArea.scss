@@ -2,19 +2,20 @@
     border: 2px solid red;
     width: 30rem;
     overflow: hidden;
+    height: 60vh;
 
     .bar {
-        width: 60%;
+        width: 55%;
         position: relative;
         right: 23%;
-        top: -3rem;
+        top: -2rem;
     }
 
     .head {
-        width: 8rem;
+        width: 6.5rem;
         position: relative;
-        top: 5.4rem;
-        right: 12.7rem;
+        top: 4.5rem;
+        right: 12rem;
         z-index: 1;
     }
 
@@ -22,15 +23,97 @@
         height: 2rem;
         width: 2rem;
         position: relative;
-        left: 8.35em;
-        top: 4.5rem;
+        left: 6.9em;
+        top: 3.5rem;
         background-color: $skin;
     }
 
     .corpus {
-        width: 5rem;
+        width: 3.5rem;
         position: relative;
-        left: 6.9rem;
-        top: 4rem;
+        left: 6.2rem;
+        top: 3rem;
+    }
+
+    .arm {
+        width: 1.7rem;
+        height: 4.5rem;
+        position: relative;
+        border-radius: 5px;
+        z-index: 1;
+    }
+
+    .arm-right {
+        right: -9.7rem;
+        top: -2.9rem;
+        transform: rotate(-50deg);
+        background-color: $arm-right;
+    }
+
+
+    .arm-left {
+        transform: rotate(50deg);
+        top: -7.3rem;
+        left: 4.4rem;
+        background-color: $arm-left;
+    }
+
+    .hand {
+        width: 1rem;
+        height: 1rem;
+        border-radius: 50%;
+        background-color: $skin;
+        position: relative;
+    }
+
+    .hand-right {
+        top: -8.6rem;
+        left: 11.9rem;
+    }
+
+    .hand-left {
+        top: -9.5rem;
+        left: 2.9rem;
+    }
+
+    .leg {
+        width: 1.6rem;
+        height: 6.5rem;
+        position: relative;
+        border-radius: 5px;
+        z-index: 1;
+        background-color: $leg;
+    }
+
+    .leg-right {
+        right: -8.8rem;
+        top: -8.8rem;
+        transform: rotate(-15deg);
+    }
+
+    .leg-left {
+        right: -5.5rem;
+        top: -15.3rem;
+        transform: rotate(15deg);
+    }
+
+    .foot {
+        width: 2.5rem;
+        height: 1rem;
+        position: relative;
+        border-radius: 5px;
+        background-color: $skin;
+    }
+
+    .foot-right {
+        right: -10rem;
+        top: -16rem;
+        transform: rotate(-10deg);
+    }
+
+    .foot-left {
+        right: -3.5rem;
+        top: -17rem;
+        transform: rotate(10deg);
     }
 }
