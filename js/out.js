@@ -12730,13 +12730,21 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 // Import components
 
 
+var urlApi = "http://api.wordnik.com:80/v4/words.json/randomWord?hasDictionaryDef=false&includePartOfSpeech=noun&excludePartOfSpeech=noun-plural&minCorpusCount=0&maxCorpusCount=-1&minDictionaryCount=1&maxDictionaryCount=-1&minLength=5&maxLength=11&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5";
+
 var Base = function (_Component) {
     _inherits(Base, _Component);
 
-    function Base() {
+    function Base(props) {
         _classCallCheck(this, Base);
 
-        return _possibleConstructorReturn(this, (Base.__proto__ || Object.getPrototypeOf(Base)).apply(this, arguments));
+        var _this = _possibleConstructorReturn(this, (Base.__proto__ || Object.getPrototypeOf(Base)).call(this, props));
+
+        _this.state = {
+            word: ""
+        };
+        _this.runApi();
+        return _this;
     }
 
     _createClass(Base, [{
@@ -12747,9 +12755,29 @@ var Base = function (_Component) {
                 { className: 'base' },
                 _react2.default.createElement(_characterContainer2.default, null),
                 _react2.default.createElement(_missedContainer2.default, null),
-                _react2.default.createElement(_wordContainer2.default, null),
+                _react2.default.createElement(_wordContainer2.default, { word: this.state.word }),
                 _react2.default.createElement(_figure2.default, null)
             );
+        }
+    }, {
+        key: 'runApi',
+        value: function runApi() {
+            var _this2 = this;
+
+            $.ajax({
+                url: urlApi,
+                // data:{
+
+                // },
+                method: 'GET'
+            }).done(function (response) {
+                console.log(response);
+                _this2.setState({
+                    word: response.word
+                });
+            }).error(function (error) {
+                console.log(error, "error");
+            });
         }
     }]);
 
@@ -13122,11 +13150,11 @@ var Letter = function (_Component) {
         value: function render() {
             return _react2.default.createElement(
                 "div",
-                { className: "box-letterCorrect" },
+                { className: "box-letterCorrect" + (this.props.letter === "" ? ' empty' : '') },
                 _react2.default.createElement(
                     "p",
                     { className: "letterCorrect" },
-                    "T"
+                    this.props.letter
                 )
             );
         }
@@ -13409,20 +13437,23 @@ var WordContainer = function (_Component) {
     _createClass(WordContainer, [{
         key: 'render',
         value: function render() {
+            var arr = this.props.word.split("");
+            console.log("moja nowa tablica", arr);
+
             return _react2.default.createElement(
                 'div',
                 { className: 'wordContainer' },
-                _react2.default.createElement(_letter2.default, null),
-                _react2.default.createElement(_letter2.default, null),
-                _react2.default.createElement(_letter2.default, null),
-                _react2.default.createElement(_letter2.default, null),
-                _react2.default.createElement(_letter2.default, null),
-                _react2.default.createElement(_letter2.default, null),
-                _react2.default.createElement(_letter2.default, null),
-                _react2.default.createElement(_letter2.default, null),
-                _react2.default.createElement(_letter2.default, null),
-                _react2.default.createElement(_letter2.default, null),
-                _react2.default.createElement(_letter2.default, null)
+                _react2.default.createElement(
+                    'p',
+                    null,
+                    this.props.word
+                ),
+                arr.map(function (letter, index) {
+                    return _react2.default.createElement(_letter2.default, {
+                        key: index,
+                        letter: letter
+                    });
+                })
             );
         }
     }]);

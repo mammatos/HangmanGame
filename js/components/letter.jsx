@@ -4,8 +4,8 @@ export default class Letter extends Component {
 
     render() {
         return (
-            <div className="box-letterCorrect">
-                <p className="letterCorrect">T</p>
+            <div className={"box-letterCorrect" + (this.props.letter === "" ? ' empty' : '')}>
+                <p className="letterCorrect">{this.props.letter}</p>
             </div>
         );
     }
