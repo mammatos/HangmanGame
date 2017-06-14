@@ -9,6 +9,7 @@
     flex-wrap: wrap;
     justify-content: space-between;
     font-family: "AllerDisplay", Arial, sans-serif;
+    position: relative;
 
     .figure {
         width: 0;
@@ -16,8 +17,8 @@
         border-bottom: 40vh solid $accent;
         border-left: 40vh solid transparent;
         position: absolute;
-        top: 53vh;
-        left: 64vw;
+        bottom: 0;
+        right: 0;
     }
 }
 
