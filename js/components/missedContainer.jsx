@@ -9,7 +9,7 @@ export default class MissedContainer extends Component {
         return (
             <div className="missedContainer">
                 <h1 className="missedHeader">You missed:</h1>
-                <MissedLettersContainer/>
+                <MissedLettersContainer missedLetters={this.props.missedLetters}/>
             </div>
         );
     }

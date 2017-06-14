@@ -21,9 +21,10 @@ export default class Base extends Component {
     }
 
     render() {
+        console.log('render - this.state.missedLetters: ', this.state.missedLetters);
         return (
             <div className="base">
-                <CharacterContainer/>
+                <CharacterContainer missedCount={this.state.missedLetters.length}/>
                 <MissedContainer missedLetters={this.state.missedLetters}/>
                 <WordContainer word={this.state.word} rightLetters={this.state.rightLetters}/>
                 <Figure/>
@@ -63,6 +64,7 @@ export default class Base extends Component {
                 });
             } else {
                 const newState = this.state.missedLetters.concat(event.key);
+                console.log('new state missed: ', newState);
                 this.setState({
                     missedLetters: newState
                 })

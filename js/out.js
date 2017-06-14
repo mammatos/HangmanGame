@@ -12752,10 +12752,11 @@ var Base = function (_Component) {
     _createClass(Base, [{
         key: 'render',
         value: function render() {
+            console.log('render - this.state.missedLetters: ', this.state.missedLetters);
             return _react2.default.createElement(
                 'div',
                 { className: 'base' },
-                _react2.default.createElement(_characterContainer2.default, null),
+                _react2.default.createElement(_characterContainer2.default, { missedCount: this.state.missedLetters.length }),
                 _react2.default.createElement(_missedContainer2.default, { missedLetters: this.state.missedLetters }),
                 _react2.default.createElement(_wordContainer2.default, { word: this.state.word, rightLetters: this.state.rightLetters }),
                 _react2.default.createElement(_figure2.default, null)
@@ -12798,6 +12799,7 @@ var Base = function (_Component) {
                     });
                 } else {
                     var _newState = _this3.state.missedLetters.concat(event.key);
+                    console.log('new state missed: ', _newState);
                     _this3.setState({
                         missedLetters: _newState
                     });
@@ -12878,21 +12880,23 @@ var CharacterContainer = function (_Component) {
     _createClass(CharacterContainer, [{
         key: 'render',
         value: function render() {
+            var n = this.props.missedCount;
+
             return _react2.default.createElement(
                 'div',
                 { className: 'characterContainer' },
                 _react2.default.createElement('img', { src: 'assets/img/bar.png', className: 'bar' }),
-                _react2.default.createElement('img', { src: 'assets/img/head.png', className: 'head' }),
-                _react2.default.createElement(_neck2.default, null),
-                _react2.default.createElement('img', { src: 'assets/img/corpus.png', className: 'corpus' }),
-                _react2.default.createElement(_arm2.default, { className: 'arm-right' }),
-                _react2.default.createElement(_arm2.default, { className: 'arm-left' }),
-                _react2.default.createElement(_hand2.default, { className: 'hand-right' }),
-                _react2.default.createElement(_hand2.default, { className: 'hand-left' }),
-                _react2.default.createElement(_leg2.default, { className: 'leg-right' }),
-                _react2.default.createElement(_leg2.default, { className: 'leg-left' }),
-                _react2.default.createElement(_foot2.default, { className: 'foot-right' }),
-                _react2.default.createElement(_foot2.default, { className: 'foot-left' })
+                n >= 1 ? _react2.default.createElement('img', { src: 'assets/img/head.png', className: 'head' }) : null,
+                n >= 2 ? _react2.default.createElement(_neck2.default, null) : null,
+                n >= 3 ? _react2.default.createElement('img', { src: 'assets/img/corpus.png', className: 'corpus' }) : null,
+                n >= 4 ? _react2.default.createElement(_arm2.default, { className: 'arm-right' }) : null,
+                n >= 5 ? _react2.default.createElement(_arm2.default, { className: 'arm-left' }) : null,
+                n >= 6 ? _react2.default.createElement(_hand2.default, { className: 'hand-right' }) : null,
+                n >= 7 ? _react2.default.createElement(_hand2.default, { className: 'hand-left' }) : null,
+                n >= 8 ? _react2.default.createElement(_leg2.default, { className: 'leg-right' }) : null,
+                n >= 9 ? _react2.default.createElement(_leg2.default, { className: 'leg-left' }) : null,
+                n >= 10 ? _react2.default.createElement(_foot2.default, { className: 'foot-right' }) : null,
+                n >= 11 ? _react2.default.createElement(_foot2.default, { className: 'foot-left' }) : null
             );
         }
     }]);
@@ -13249,7 +13253,7 @@ var MissedContainer = function (_Component) {
                     { className: 'missedHeader' },
                     'You missed:'
                 ),
-                _react2.default.createElement(_missedLettersContainer2.default, null)
+                _react2.default.createElement(_missedLettersContainer2.default, { missedLetters: this.props.missedLetters })
             );
         }
     }]);
@@ -13302,7 +13306,7 @@ var MissedLetter = function (_Component) {
                 _react2.default.createElement(
                     "p",
                     { className: "missedLetter" },
-                    "B"
+                    this.props.letter
                 )
             );
         }
@@ -13357,19 +13361,18 @@ var MissedLettersContainer = function (_Component) {
     _createClass(MissedLettersContainer, [{
         key: 'render',
         value: function render() {
+            console.log('this.props.missedLetters innner:', this.props.missedLetters);
+            var missedArr = this.props.missedLetters;
+
             return _react2.default.createElement(
                 'div',
                 { className: 'missedLettersContainer' },
-                _react2.default.createElement(_missedLetter2.default, null),
-                _react2.default.createElement(_missedLetter2.default, null),
-                _react2.default.createElement(_missedLetter2.default, null),
-                _react2.default.createElement(_missedLetter2.default, null),
-                _react2.default.createElement(_missedLetter2.default, null),
-                _react2.default.createElement(_missedLetter2.default, null),
-                _react2.default.createElement(_missedLetter2.default, null),
-                _react2.default.createElement(_missedLetter2.default, null),
-                _react2.default.createElement(_missedLetter2.default, null),
-                _react2.default.createElement(_missedLetter2.default, null)
+                missedArr.map(function (l, index) {
+                    return _react2.default.createElement(_missedLetter2.default, {
+                        letter: l,
+                        key: index
+                    });
+                })
             );
         }
     }]);
@@ -13474,26 +13477,26 @@ var WordContainer = function (_Component) {
             var _this2 = this;
 
             var arr = this.props.word.split("");
-            console.log("moja nowa tablica", arr);
+            // console.log("moja nowa tablica", arr);
             var emptyArrLength = maxLength - arr.length;
-            console.log("ilość pustych znakow", emptyArrLength);
+            // console.log("ilość pustych znakow", emptyArrLength);
 
             var newArr = new Array(emptyArrLength).fill(" ");
-            console.log("tablica z pustymi znakami", newArr);
+            // console.log("tablica z pustymi znakami", newArr)
 
             var wordRow = newArr.concat(arr);
-            console.log("połączone tablice", wordRow);
+            // console.log("połączone tablice", wordRow)
 
             return _react2.default.createElement(
                 'div',
                 { className: 'wordContainer' },
-                wordRow.map(function (letter, index) {
-                    console.log("to jest letter", letter);
-                    console.log("to jest this.props.rightLetter", _this2.props.rightLetters);
+                wordRow.map(function (l, index) {
+                    {/*console.log("to jest letter", l);*/}
+                    {/*console.log("to jest this.props.rightLetter", this.props.rightLetters);*/}
                     return _react2.default.createElement(_letter2.default, {
                         key: index,
-                        letter: letter,
-                        className: _this2.props.rightLetters.includes(letter) ? 'visible' : ''
+                        letter: l,
+                        className: _this2.props.rightLetters.includes(l) ? 'visible' : ''
                     });
                 })
             );

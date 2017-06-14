@@ -77,17 +77,18 @@ table {
   border: 2px solid red;
   width: 20rem;
   overflow: hidden;
-  height: 60vh; }
+  height: 60vh;
+  position: relative; }
   .characterContainer .bar {
     width: 13rem;
-    position: relative;
-    right: 4rem;
-    top: -2rem; }
+    position: absolute;
+    left: -4rem;
+    top: 3rem; }
   .characterContainer .head {
     width: 6.5rem;
     position: relative;
     top: 4.5rem;
-    right: 8.5rem;
+    left: 4.5rem;
     z-index: 1; }
   .characterContainer .neck {
     height: 2rem;

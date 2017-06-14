@@ -9,25 +9,25 @@ export default class WordContainer extends Component {
 
     render() {
         const arr = this.props.word.split("");
-        console.log("moja nowa tablica", arr);
+        // console.log("moja nowa tablica", arr);
         const emptyArrLength = maxLength - arr.length;
-        console.log("ilość pustych znakow", emptyArrLength);
+        // console.log("ilość pustych znakow", emptyArrLength);
 
         const newArr = new Array(emptyArrLength).fill(" ");
-        console.log("tablica z pustymi znakami", newArr)
+        // console.log("tablica z pustymi znakami", newArr)
 
         const wordRow = newArr.concat(arr);
-        console.log("połączone tablice", wordRow)
+        // console.log("połączone tablice", wordRow)
 
         return (
             <div className="wordContainer">
-                {wordRow.map((letter, index) => {
-                    console.log("to jest letter", letter);
-                    console.log("to jest this.props.rightLetter", this.props.rightLetters);
+                {wordRow.map((l, index) => {
+                    {/*console.log("to jest letter", l);*/}
+                    {/*console.log("to jest this.props.rightLetter", this.props.rightLetters);*/}
                     return <Letter 
                                 key={index} 
-                                letter={letter}
-                                className={this.props.rightLetters.includes(letter) ? 'visible' : ''}
+                                letter={l}
+                                className={this.props.rightLetters.includes(l) ? 'visible' : ''}
                             />
                 })}
             </div>
