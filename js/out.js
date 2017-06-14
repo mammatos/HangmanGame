@@ -12719,6 +12719,10 @@ var _figure = __webpack_require__(119);
 
 var _figure2 = _interopRequireDefault(_figure);
 
+var _overlay = __webpack_require__(257);
+
+var _overlay2 = _interopRequireDefault(_overlay);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -12731,6 +12735,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 
 var urlApi = "http://api.wordnik.com:80/v4/words.json/randomWord?hasDictionaryDef=false&includePartOfSpeech=noun&excludePartOfSpeech=noun-plural&minCorpusCount=0&maxCorpusCount=-1&minDictionaryCount=1&maxDictionaryCount=-1&minLength=5&maxLength=11&api_key=a2a73e7b926c924fad7001ca3111acd55af2ffabf50eb4ae5";
+
+var regEx = /[a-zA-Z]/;
 
 var Base = function (_Component) {
     _inherits(Base, _Component);
@@ -12759,7 +12765,8 @@ var Base = function (_Component) {
                 _react2.default.createElement(_characterContainer2.default, { missedCount: this.state.missedLetters.length }),
                 _react2.default.createElement(_missedContainer2.default, { missedLetters: this.state.missedLetters }),
                 _react2.default.createElement(_wordContainer2.default, { word: this.state.word, rightLetters: this.state.rightLetters }),
-                _react2.default.createElement(_figure2.default, null)
+                _react2.default.createElement(_figure2.default, null),
+                _react2.default.createElement(_overlay2.default, null)
             );
         }
     }, {
@@ -12790,19 +12797,20 @@ var Base = function (_Component) {
 
             document.addEventListener('keydown', function (event) {
                 console.log(event.key);
-
-                if (_this3.state.word.includes(event.key)) {
-                    var newState = _this3.state.rightLetters.concat(event.key);
-                    console.log('new state:', newState);
-                    _this3.setState({
-                        rightLetters: newState
-                    });
-                } else {
-                    var _newState = _this3.state.missedLetters.concat(event.key);
-                    console.log('new state missed: ', _newState);
-                    _this3.setState({
-                        missedLetters: _newState
-                    });
+                if (regEx.test(event.key) && event.key.length === 1) {
+                    if (_this3.state.word.includes(event.key) && !_this3.state.rightLetters.includes(event.key) && _this3.state.rightLetters.length < _this3.state.word.length && _this3.state.missedLetters.length < 11) {
+                        var newState = _this3.state.rightLetters.concat(event.key);
+                        console.log('new state:', newState);
+                        _this3.setState({
+                            rightLetters: newState
+                        });
+                    } else if (!_this3.state.missedLetters.includes(event.key) && _this3.state.missedLetters.length < 11 && _this3.state.rightLetters.length < _this3.state.word.length && !_this3.state.rightLetters.includes(event.key)) {
+                        var _newState = _this3.state.missedLetters.concat(event.key);
+                        console.log('new state missed: ', _newState);
+                        _this3.setState({
+                            missedLetters: _newState
+                        });
+                    }
                 }
             });
         }
@@ -28616,6 +28624,65 @@ module.exports = function (str) {
 __webpack_require__(113);
 module.exports = __webpack_require__(114);
 
+
+/***/ }),
+/* 257 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(5);
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Overlay = function (_Component) {
+    _inherits(Overlay, _Component);
+
+    function Overlay() {
+        _classCallCheck(this, Overlay);
+
+        return _possibleConstructorReturn(this, (Overlay.__proto__ || Object.getPrototypeOf(Overlay)).apply(this, arguments));
+    }
+
+    _createClass(Overlay, [{
+        key: "render",
+        value: function render() {
+            return _react2.default.createElement(
+                "div",
+                { className: "overlay" },
+                _react2.default.createElement(
+                    "h1",
+                    { className: "gameOverText" },
+                    "Game over"
+                ),
+                _react2.default.createElement(
+                    "button",
+                    { className: "restartText" },
+                    "new word"
+                )
+            );
+        }
+    }]);
+
+    return Overlay;
+}(_react.Component);
+
+exports.default = Overlay;
 
 /***/ })
 /******/ ]);

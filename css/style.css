@@ -74,7 +74,6 @@ table {
     right: 0; }
 
 .characterContainer {
-  border: 2px solid red;
   width: 20rem;
   overflow: hidden;
   height: 60vh;
@@ -161,7 +160,6 @@ table {
     transform: rotate(10deg); }
 
 .missedContainer {
-  border: 2px solid green;
   width: 30rem;
   margin-top: 2rem; }
   .missedContainer .missedHeader {
@@ -176,7 +174,6 @@ table {
       margin-right: 1rem; }
 
 .wordContainer {
-  border: 2px solid orange;
   width: 100%;
   display: flex;
   justify-content: space-between;
@@ -200,3 +197,31 @@ table {
         visibility: visible; }
   .wordContainer .empty {
     background-color: #E6E6E7; }
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background-color: #445588;
+  opacity: 0.5;
+  z-index: 1; }
+  .overlay .gameOverText {
+    color: #ffffff;
+    text-transform: uppercase;
+    font-size: 3.5rem;
+    margin-bottom: 1rem; }
+  .overlay .restartText {
+    color: #FFB900;
+    text-transform: uppercase;
+    background: none;
+    border: 3px dashed #FFB900;
+    padding: 1.6rem 4rem;
+    border-radius: 40px;
+    font-family: "AllerDisplay", Arial, sans-serif;
+    font-size: 1.2rem; }
