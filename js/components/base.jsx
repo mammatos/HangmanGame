@@ -51,11 +51,7 @@ export default class Base extends Component {
     }
 
     runApi() {
-        $.ajax({
-            url: urlApi,
-            method: 'GET'
-        })
-        .done((response) => {
+        $.get(urlApi, (response) => {
             if(response.word.includes("-")) {
                 this.runApi();
             } else {
@@ -66,9 +62,6 @@ export default class Base extends Component {
                     wordLenghtWithoutDuplicates: arrayWithoutDuplicates.length
                 })
             }
-        })
-        .error((error) => {
-            console.log(error, "error");
         });
     }
 

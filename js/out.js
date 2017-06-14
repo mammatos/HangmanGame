@@ -12789,10 +12789,7 @@ var Base = function (_Component) {
         value: function runApi() {
             var _this2 = this;
 
-            $.ajax({
-                url: urlApi,
-                method: 'GET'
-            }).done(function (response) {
+            $.get(urlApi, function (response) {
                 if (response.word.includes("-")) {
                     _this2.runApi();
                 } else {
@@ -12803,8 +12800,6 @@ var Base = function (_Component) {
                         wordLenghtWithoutDuplicates: arrayWithoutDuplicates.length
                     });
                 }
-            }).error(function (error) {
-                console.log(error, "error");
             });
         }
     }, {
