@@ -193,6 +193,9 @@ table {
     .wordContainer .box-letterCorrect .letterCorrect {
       color: #ffffff;
       font-size: 2.5rem;
-      text-transform: uppercase; }
+      text-transform: uppercase;
+      visibility: hidden; }
+      .wordContainer .box-letterCorrect .letterCorrect.visible {
+        visibility: visible; }
   .wordContainer .empty {
     background-color: #E6E6E7; }

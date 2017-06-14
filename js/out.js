@@ -12741,7 +12741,9 @@ var Base = function (_Component) {
         var _this = _possibleConstructorReturn(this, (Base.__proto__ || Object.getPrototypeOf(Base)).call(this, props));
 
         _this.state = {
-            word: ""
+            word: "",
+            rightLetters: [],
+            missedLetters: []
         };
         _this.runApi();
         return _this;
@@ -12754,8 +12756,8 @@ var Base = function (_Component) {
                 'div',
                 { className: 'base' },
                 _react2.default.createElement(_characterContainer2.default, null),
-                _react2.default.createElement(_missedContainer2.default, null),
-                _react2.default.createElement(_wordContainer2.default, { word: this.state.word }),
+                _react2.default.createElement(_missedContainer2.default, { missedLetters: this.state.missedLetters }),
+                _react2.default.createElement(_wordContainer2.default, { word: this.state.word, rightLetters: this.state.rightLetters }),
                 _react2.default.createElement(_figure2.default, null)
             );
         }
@@ -12766,9 +12768,6 @@ var Base = function (_Component) {
 
             $.ajax({
                 url: urlApi,
-                // data:{
-
-                // },
                 method: 'GET'
             }).done(function (response) {
                 if (response.word.includes("-")) {
@@ -12781,6 +12780,35 @@ var Base = function (_Component) {
                 }
             }).error(function (error) {
                 console.log(error, "error");
+            });
+        }
+    }, {
+        key: 'componentDidMount',
+        value: function componentDidMount() {
+            var _this3 = this;
+
+            document.addEventListener('keydown', function (event) {
+                console.log(event.key);
+
+                if (_this3.state.word.includes(event.key)) {
+                    var newState = _this3.state.rightLetters.concat(event.key);
+                    console.log('new state:', newState);
+                    _this3.setState({
+                        rightLetters: newState
+                    });
+                } else {
+                    var _newState = _this3.state.missedLetters.concat(event.key);
+                    _this3.setState({
+                        missedLetters: _newState
+                    });
+                }
+            });
+        }
+    }, {
+        key: 'componentWillUnmount',
+        value: function componentWillUnmount() {
+            document.removeEventListener('keydown', function () {
+                console.log("keydowndziała");
             });
         }
     }]);
@@ -13154,10 +13182,10 @@ var Letter = function (_Component) {
         value: function render() {
             return _react2.default.createElement(
                 "div",
-                { className: "box-letterCorrect" + " " + (this.props.letter === " " ? 'empty' : '') },
+                { className: "box-letterCorrect" + (this.props.letter === " " ? ' empty' : '') },
                 _react2.default.createElement(
                     "p",
-                    { className: "letterCorrect" },
+                    { className: "letterCorrect" + " " + this.props.className },
                     this.props.letter
                 )
             );
@@ -13443,6 +13471,8 @@ var WordContainer = function (_Component) {
     _createClass(WordContainer, [{
         key: 'render',
         value: function render() {
+            var _this2 = this;
+
             var arr = this.props.word.split("");
             console.log("moja nowa tablica", arr);
             var emptyArrLength = maxLength - arr.length;
@@ -13458,9 +13488,12 @@ var WordContainer = function (_Component) {
                 'div',
                 { className: 'wordContainer' },
                 wordRow.map(function (letter, index) {
+                    console.log("to jest letter", letter);
+                    console.log("to jest this.props.rightLetter", _this2.props.rightLetters);
                     return _react2.default.createElement(_letter2.default, {
                         key: index,
-                        letter: letter
+                        letter: letter,
+                        className: _this2.props.rightLetters.includes(letter) ? 'visible' : ''
                     });
                 })
             );

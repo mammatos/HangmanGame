@@ -13,7 +13,9 @@ export default class Base extends Component {
     constructor(props){
         super(props);
         this.state = {
-            word: ""
+            word: "",
+            rightLetters: [],
+            missedLetters: []
         }
         this.runApi();
     }
@@ -22,8 +24,8 @@ export default class Base extends Component {
         return (
             <div className="base">
                 <CharacterContainer/>
-                <MissedContainer/>
-                <WordContainer word={this.state.word}/>
+                <MissedContainer missedLetters={this.state.missedLetters}/>
+                <WordContainer word={this.state.word} rightLetters={this.state.rightLetters}/>
                 <Figure/>
             </div>
         );
@@ -32,9 +34,6 @@ export default class Base extends Component {
     runApi() {
         $.ajax({
             url: urlApi,
-            // data:{
-                
-            // },
             method: 'GET'
         })
         .done((response) => {
@@ -51,5 +50,32 @@ export default class Base extends Component {
             console.log(error, "error");
         });
     }
+
+    componentDidMount() {
+        document.addEventListener('keydown', (event) => {
+            console.log(event.key);
+
+            if(this.state.word.includes(event.key)) {
+                const newState = this.state.rightLetters.concat(event.key);
+                console.log('new state:', newState);
+                this.setState({
+                    rightLetters: newState
+                });
+            } else {
+                const newState = this.state.missedLetters.concat(event.key);
+                this.setState({
+                    missedLetters: newState
+                })
+            }
+            
+        });  
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('keydown', function(){
+            console.log("keydowndziała");
+        });  
+    }
+
 
 }

@@ -22,9 +22,12 @@ export default class WordContainer extends Component {
         return (
             <div className="wordContainer">
                 {wordRow.map((letter, index) => {
+                    console.log("to jest letter", letter);
+                    console.log("to jest this.props.rightLetter", this.props.rightLetters);
                     return <Letter 
                                 key={index} 
                                 letter={letter}
+                                className={this.props.rightLetters.includes(letter) ? 'visible' : ''}
                             />
                 })}
             </div>
