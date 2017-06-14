@@ -51,18 +51,34 @@ export default class Base extends Component {
     }
 
     runApi() {
-        $.get(urlApi, (response) => {
-            if(response.word.includes("-")) {
+        fetch(urlApi).then((response) => {
+            return response.json();
+        }).then((responseData) => {
+            if(responseData.word.includes("-")) {
                 this.runApi();
             } else {
-                console.log(response);
-                const arrayWithoutDuplicates = this.removeDuplicates(response.word.split(""));
+                console.log(responseData);
+                const arrayWithoutDuplicates = this.removeDuplicates(responseData.word.split(""));
                 this.setState({
-                    word: response.word,
+                    word: responseData.word,
                     wordLenghtWithoutDuplicates: arrayWithoutDuplicates.length
                 })
             }
+        }).catch((error) => {
+            console.log(error);
         });
+        // $.get(urlApi, (response) => {
+        //     if(response.word.includes("-")) {
+        //         this.runApi();
+        //     } else {
+        //         console.log(response);
+        //         const arrayWithoutDuplicates = this.removeDuplicates(response.word.split(""));
+        //         this.setState({
+        //             word: response.word,
+        //             wordLenghtWithoutDuplicates: arrayWithoutDuplicates.length
+        //         })
+        //     }
+        // });
     }
 
     componentDidMount() {

@@ -12789,18 +12789,34 @@ var Base = function (_Component) {
         value: function runApi() {
             var _this2 = this;
 
-            $.get(urlApi, function (response) {
-                if (response.word.includes("-")) {
+            fetch(urlApi).then(function (response) {
+                return response.json();
+            }).then(function (responseData) {
+                if (responseData.word.includes("-")) {
                     _this2.runApi();
                 } else {
-                    console.log(response);
-                    var arrayWithoutDuplicates = _this2.removeDuplicates(response.word.split(""));
+                    console.log(responseData);
+                    var arrayWithoutDuplicates = _this2.removeDuplicates(responseData.word.split(""));
                     _this2.setState({
-                        word: response.word,
+                        word: responseData.word,
                         wordLenghtWithoutDuplicates: arrayWithoutDuplicates.length
                     });
                 }
+            }).catch(function (error) {
+                console.log(error);
             });
+            // $.get(urlApi, (response) => {
+            //     if(response.word.includes("-")) {
+            //         this.runApi();
+            //     } else {
+            //         console.log(response);
+            //         const arrayWithoutDuplicates = this.removeDuplicates(response.word.split(""));
+            //         this.setState({
+            //             word: response.word,
+            //             wordLenghtWithoutDuplicates: arrayWithoutDuplicates.length
+            //         })
+            //     }
+            // });
         }
     }, {
         key: 'componentDidMount',
