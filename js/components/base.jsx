@@ -17,23 +17,37 @@ export default class Base extends Component {
         super(props);
         this.state = {
             word: "",
+            wordLenghtWithoutDuplicates: 0,
             rightLetters: [],
             missedLetters: []
         }
         this.runApi();
+        this.newGame=this.newGame.bind(this);
     }
 
     render() {
         console.log('render - this.state.missedLetters: ', this.state.missedLetters);
+        console.log('this.state.rightLetters.length: ', this.state.rightLetters.length);
+        console.log('this.state.word.length: ', this.state.word.length);
+
         return (
             <div className="base">
                 <CharacterContainer missedCount={this.state.missedLetters.length}/>
                 <MissedContainer missedLetters={this.state.missedLetters}/>
                 <WordContainer word={this.state.word} rightLetters={this.state.rightLetters}/>
                 <Figure/>
-                <Overlay/>
+                {(this.state.wordLenghtWithoutDuplicates > 0 && (this.state.missedLetters.length >= 11 || this.state.rightLetters.length >= this.state.wordLenghtWithoutDuplicates)) ? <Overlay newGame={this.newGame}/> : null}
             </div>
         );
+    }
+
+    newGame() {
+        this.setState({
+            word: "",
+            rightLetters: [],
+            missedLetters: []
+        })
+        this.runApi();
     }
 
     runApi() {
@@ -46,8 +60,10 @@ export default class Base extends Component {
                 this.runApi();
             } else {
                 console.log(response);
+                const arrayWithoutDuplicates = this.removeDuplicates(response.word.split(""));
                 this.setState({
-                    word: response.word
+                    word: response.word,
+                    wordLenghtWithoutDuplicates: arrayWithoutDuplicates.length
                 })
             }
         })
@@ -59,14 +75,14 @@ export default class Base extends Component {
     componentDidMount() {
         document.addEventListener('keydown', (event) => {
             console.log(event.key);
-            if(regEx.test(event.key) && event.key.length === 1) {
-                if(this.state.word.includes(event.key) && !this.state.rightLetters.includes(event.key) && this.state.rightLetters.length < this.state.word.length && this.state.missedLetters.length < 11) {
+            if(regEx.test(event.key) && event.key.length === 1 && this.state.word.length > 0) {
+                if(this.state.word.includes(event.key) && !this.state.rightLetters.includes(event.key) && this.state.rightLetters.length < this.state.wordLenghtWithoutDuplicates && this.state.missedLetters.length < 11) {
                     const newState = this.state.rightLetters.concat(event.key);
                     console.log('new state:', newState);
                     this.setState({
                         rightLetters: newState
                     });
-                } else if (!this.state.missedLetters.includes(event.key) && this.state.missedLetters.length < 11 && this.state.rightLetters.length < this.state.word.length && !this.state.rightLetters.includes(event.key)){
+                } else if (!this.state.missedLetters.includes(event.key) && this.state.missedLetters.length < 11 && this.state.rightLetters.length < this.state.wordLenghtWithoutDuplicates && !this.state.rightLetters.includes(event.key)){
                     const newState = this.state.missedLetters.concat(event.key);
                     console.log('new state missed: ', newState);
                     this.setState({
@@ -83,5 +99,9 @@ export default class Base extends Component {
         });  
     }
 
-
+    removeDuplicates(arr) {
+        return arr.filter((item, index) => {
+            return arr.indexOf(item) === index;
+        });
+    }
 }

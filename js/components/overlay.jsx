@@ -6,8 +6,12 @@ export default class Overlay extends Component {
         return (
             <div className="overlay">
                 <h1 className="gameOverText">Game over</h1>
-                <button className="restartText">new word</button>
+                <button className="restartText" onClick={this.handleOnClickButton.bind(this)}>new word</button>
             </div>
         )
+    }
+
+    handleOnClickButton() {
+        this.props.newGame();
     }
 }

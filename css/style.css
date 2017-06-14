@@ -171,7 +171,8 @@ table {
     .missedContainer .missedLettersContainer .missedLetter {
       color: #4D71FB;
       font-size: 3rem;
-      margin-right: 1rem; }
+      margin-right: 0.5rem;
+      text-transform: uppercase; }
 
 .wordContainer {
   width: 100%;
@@ -224,4 +225,5 @@ table {
     padding: 1.6rem 4rem;
     border-radius: 40px;
     font-family: "AllerDisplay", Arial, sans-serif;
-    font-size: 1.2rem; }
+    font-size: 1.2rem;
+    cursor: pointer; }

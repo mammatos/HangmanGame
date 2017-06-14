@@ -12748,10 +12748,12 @@ var Base = function (_Component) {
 
         _this.state = {
             word: "",
+            wordLenghtWithoutDuplicates: 0,
             rightLetters: [],
             missedLetters: []
         };
         _this.runApi();
+        _this.newGame = _this.newGame.bind(_this);
         return _this;
     }
 
@@ -12759,6 +12761,9 @@ var Base = function (_Component) {
         key: 'render',
         value: function render() {
             console.log('render - this.state.missedLetters: ', this.state.missedLetters);
+            console.log('this.state.rightLetters.length: ', this.state.rightLetters.length);
+            console.log('this.state.word.length: ', this.state.word.length);
+
             return _react2.default.createElement(
                 'div',
                 { className: 'base' },
@@ -12766,8 +12771,18 @@ var Base = function (_Component) {
                 _react2.default.createElement(_missedContainer2.default, { missedLetters: this.state.missedLetters }),
                 _react2.default.createElement(_wordContainer2.default, { word: this.state.word, rightLetters: this.state.rightLetters }),
                 _react2.default.createElement(_figure2.default, null),
-                _react2.default.createElement(_overlay2.default, null)
+                this.state.wordLenghtWithoutDuplicates > 0 && (this.state.missedLetters.length >= 11 || this.state.rightLetters.length >= this.state.wordLenghtWithoutDuplicates) ? _react2.default.createElement(_overlay2.default, { newGame: this.newGame }) : null
             );
+        }
+    }, {
+        key: 'newGame',
+        value: function newGame() {
+            this.setState({
+                word: "",
+                rightLetters: [],
+                missedLetters: []
+            });
+            this.runApi();
         }
     }, {
         key: 'runApi',
@@ -12782,8 +12797,10 @@ var Base = function (_Component) {
                     _this2.runApi();
                 } else {
                     console.log(response);
+                    var arrayWithoutDuplicates = _this2.removeDuplicates(response.word.split(""));
                     _this2.setState({
-                        word: response.word
+                        word: response.word,
+                        wordLenghtWithoutDuplicates: arrayWithoutDuplicates.length
                     });
                 }
             }).error(function (error) {
@@ -12797,14 +12814,14 @@ var Base = function (_Component) {
 
             document.addEventListener('keydown', function (event) {
                 console.log(event.key);
-                if (regEx.test(event.key) && event.key.length === 1) {
-                    if (_this3.state.word.includes(event.key) && !_this3.state.rightLetters.includes(event.key) && _this3.state.rightLetters.length < _this3.state.word.length && _this3.state.missedLetters.length < 11) {
+                if (regEx.test(event.key) && event.key.length === 1 && _this3.state.word.length > 0) {
+                    if (_this3.state.word.includes(event.key) && !_this3.state.rightLetters.includes(event.key) && _this3.state.rightLetters.length < _this3.state.wordLenghtWithoutDuplicates && _this3.state.missedLetters.length < 11) {
                         var newState = _this3.state.rightLetters.concat(event.key);
                         console.log('new state:', newState);
                         _this3.setState({
                             rightLetters: newState
                         });
-                    } else if (!_this3.state.missedLetters.includes(event.key) && _this3.state.missedLetters.length < 11 && _this3.state.rightLetters.length < _this3.state.word.length && !_this3.state.rightLetters.includes(event.key)) {
+                    } else if (!_this3.state.missedLetters.includes(event.key) && _this3.state.missedLetters.length < 11 && _this3.state.rightLetters.length < _this3.state.wordLenghtWithoutDuplicates && !_this3.state.rightLetters.includes(event.key)) {
                         var _newState = _this3.state.missedLetters.concat(event.key);
                         console.log('new state missed: ', _newState);
                         _this3.setState({
@@ -12819,6 +12836,13 @@ var Base = function (_Component) {
         value: function componentWillUnmount() {
             document.removeEventListener('keydown', function () {
                 console.log("keydowndziała");
+            });
+        }
+    }, {
+        key: 'removeDuplicates',
+        value: function removeDuplicates(arr) {
+            return arr.filter(function (item, index) {
+                return arr.indexOf(item) === index;
             });
         }
     }]);
@@ -28672,10 +28696,15 @@ var Overlay = function (_Component) {
                 ),
                 _react2.default.createElement(
                     "button",
-                    { className: "restartText" },
+                    { className: "restartText", onClick: this.handleOnClickButton.bind(this) },
                     "new word"
                 )
             );
+        }
+    }, {
+        key: "handleOnClickButton",
+        value: function handleOnClickButton() {
+            this.props.newGame();
         }
     }]);
 
