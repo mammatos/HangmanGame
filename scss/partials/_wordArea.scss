@@ -19,6 +19,12 @@
         .letterCorrect {
             color: $letterCorrect;
             font-size: 2.5rem;
+            text-transform: uppercase;
         }
     }
+
+    .empty {
+    background-color: $boxBg-empty;
+    }
 }
+

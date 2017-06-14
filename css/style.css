@@ -192,4 +192,7 @@ table {
     align-items: center; }
     .wordContainer .box-letterCorrect .letterCorrect {
       color: #ffffff;
-      font-size: 2.5rem; }
+      font-size: 2.5rem;
+      text-transform: uppercase; }
+  .wordContainer .empty {
+    background-color: #E6E6E7; }

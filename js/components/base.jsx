@@ -38,10 +38,14 @@ export default class Base extends Component {
             method: 'GET'
         })
         .done((response) => {
-            console.log(response);
-            this.setState({
-                word: response.word
-            })
+            if(response.word.includes("-")) {
+                this.runApi();
+            } else {
+                console.log(response);
+                this.setState({
+                    word: response.word
+                })
+            }
         })
         .error((error) => {
             console.log(error, "error");

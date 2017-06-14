@@ -12771,10 +12771,14 @@ var Base = function (_Component) {
                 // },
                 method: 'GET'
             }).done(function (response) {
-                console.log(response);
-                _this2.setState({
-                    word: response.word
-                });
+                if (response.word.includes("-")) {
+                    _this2.runApi();
+                } else {
+                    console.log(response);
+                    _this2.setState({
+                        word: response.word
+                    });
+                }
             }).error(function (error) {
                 console.log(error, "error");
             });
@@ -13150,7 +13154,7 @@ var Letter = function (_Component) {
         value: function render() {
             return _react2.default.createElement(
                 "div",
-                { className: "box-letterCorrect" + (this.props.letter === "" ? ' empty' : '') },
+                { className: "box-letterCorrect" + " " + (this.props.letter === " " ? 'empty' : '') },
                 _react2.default.createElement(
                     "p",
                     { className: "letterCorrect" },
@@ -13425,6 +13429,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 // Import components
 
 
+var maxLength = 11;
+
 var WordContainer = function (_Component) {
     _inherits(WordContainer, _Component);
 
@@ -13439,16 +13445,19 @@ var WordContainer = function (_Component) {
         value: function render() {
             var arr = this.props.word.split("");
             console.log("moja nowa tablica", arr);
+            var emptyArrLength = maxLength - arr.length;
+            console.log("ilość pustych znakow", emptyArrLength);
+
+            var newArr = new Array(emptyArrLength).fill(" ");
+            console.log("tablica z pustymi znakami", newArr);
+
+            var wordRow = newArr.concat(arr);
+            console.log("połączone tablice", wordRow);
 
             return _react2.default.createElement(
                 'div',
                 { className: 'wordContainer' },
-                _react2.default.createElement(
-                    'p',
-                    null,
-                    this.props.word
-                ),
-                arr.map(function (letter, index) {
+                wordRow.map(function (letter, index) {
                     return _react2.default.createElement(_letter2.default, {
                         key: index,
                         letter: letter
